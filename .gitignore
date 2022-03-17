@@ -31,3 +31,8 @@ Makefile*
 *.html
 *~
 .qmake.cache
+
+build
+build/*
+arm_build
+arm_build/*
