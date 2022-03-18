@@ -32,9 +32,25 @@ import QtQuick.VirtualKeyboard 2.1
 import "content"
 
 Rectangle {
+    id: aplicationwindow
     width: 1280
     height: 720
     color: "#F6F6F6"
+    InputPanel {
+        id: inputPanel
+        z: 70
+        y: parent.height
+        anchors.left: parent.left
+        anchors.right: parent.right
+        states: State {
+            name: "visible"
+            when: Qt.inputMethod.visible
+            PropertyChanges {
+                target: inputPanel
+                y: parent.height - inputPanel.height
+            }
+        }
+    }
 
     Flickable {
         id: flickable

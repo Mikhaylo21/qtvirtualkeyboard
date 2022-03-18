@@ -112,6 +112,8 @@ public:
     SelectionListModel *wordCandidateListModel() const;
     bool wordCandidateListVisibleHint() const;
 
+    QString textPreview() const;
+
     QList<int> patternRecognitionModes() const;
     Q_INVOKABLE QtVirtualKeyboard::Trace *traceBegin(int traceId, QtVirtualKeyboard::InputEngine::PatternRecognitionMode patternRecognitionMode,
                                                      const QVariantMap &traceCaptureDeviceInfo, const QVariantMap &traceScreenInfo);

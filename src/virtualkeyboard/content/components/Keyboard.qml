@@ -472,39 +472,32 @@ Item {
         }
     }
 
-    ListView {
+    Item {
+        // Modified to show the focused Text input
         id: wordCandidateView
         objectName: "wordCandidateView"
-        clip: true
         height: Math.round(style.selectionListHeight)
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.right: parent.right
-        spacing: 0
-        orientation: ListView.Horizontal
-        snapMode: ListView.SnapToItem
-        delegate: style.selectionListDelegate
-        highlight: style.selectionListHighlight ? style.selectionListHighlight : defaultHighlight
-        highlightMoveDuration: 0
-        highlightResizeDuration: 0
-        add: style.selectionListAdd
-        remove: style.selectionListRemove
-        keyNavigationWraps: true
-        model: InputContext.inputEngine.wordCandidateListModel
-        onCurrentItemChanged: if (currentItem) soundEffect.register(currentItem.soundEffect)
-        Connections {
-            target: wordCandidateView.model ? wordCandidateView.model : null
-            onActiveItemChanged: wordCandidateView.currentIndex = index
-            onItemSelected: if (wordCandidateView.currentItem) soundEffect.play(wordCandidateView.currentItem.soundEffect)
+        Rectangle {
+            anchors.centerIn: parent
+            width: parent.width/2
+            height: parent.height-5
+            color: "transparent"
+            Text {
+                property Item focusedObject: InputContext.inputItem 
+                anchors.fill: parent
+                text: (focusedObject && focusedObject.text != undefined) ? focusedObject.text : ""
+                color: "white"
+                fontSizeMode: Text.Fit
+                font.pointSize: 100
+            }
         }
         Loader {
             sourceComponent: style.selectionListBackground
             anchors.fill: parent
             z: -1
-        }
-        Component {
-            id: defaultHighlight
-            Item {}
         }
     }
 
